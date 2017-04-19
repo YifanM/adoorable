@@ -52,16 +52,24 @@ function initialize(c, ctx) {
 	var rectWidth = 20;
 	var rectX = c.width * (5 / 8) - rectWidth / 2;
 	var rectY = c.height / 2 -rectHeight / 2;
+	ctx.fillStyle = "#33334d";
 	ctx.fillRect(rectX, rectY, rectWidth, rectHeight);
+	ctx.fillStyle = "black";
 
 	objectLocations["startingRect"] = {
-		type: "rectangle",
-		topLeft: [rectX, rectY],
-		topRight: [rectX + rectWidth, rectY],
-		bottomLeft: [rectX, rectY + rectHeight],
-		bottomRight: [rectX + rectWidth, rectY + rectHeight]
+		type: "square",
+		x: rectX,
+		y: rectY,
+		w: rectWidth,
+		h: rectHeight,
 	};
 
 	gameState = 0;
+	keyFound = false;
 
+}
+
+function initializeMain(c, ctx) {
+	$("canvas").fadeOut();
+	$("canvas").fadeIn();
 }

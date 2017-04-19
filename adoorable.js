@@ -4,6 +4,9 @@ var playerSrc;
 var playerHeight;
 var playerWidth;
 
+var origPlayerX;
+var origPlayerY;
+
 var keyX;
 var keyY;
 var keySrc;
@@ -26,7 +29,11 @@ var travelledPath = [];
 var trailPath = [];
 
 var objectLocations = {};
-var collided = false;
+var xCollided = false;
+var yCollided = false;
+var horiCollided = false;
+var vertCollided = false;
+var keyFound;
 
 function movePlayer(ctx) {
 
@@ -36,31 +43,36 @@ function movePlayer(ctx) {
 		return;
 	}
 
-	let origPlayerX = playerX;
-	let origPlayerY = playerY;
+	origPlayerX = playerX;
+	origPlayerY = playerY;
+
+	if (keysPressed[37]) playerX = playerX - 3.5; //left
+	if (keysPressed[38]) playerY = playerY - 3.5; //up
+	if (keysPressed[39]) playerX = playerX + 3.5; //right
+	if (keysPressed[40]) playerY = playerY + 3.5; //down
 
 	detectCollisions();
 
-	if (!collided) {
-		if (keysPressed[37]) playerX = playerX - 3.5; //left
-		if (keysPressed[38]) playerY = playerY - 3.5; //up
-		if (keysPressed[39]) playerX = playerX + 3.5; //right
-		if (keysPressed[40]) playerY = playerY + 3.5; //down
+	if (xCollided && horiCollided) playerX = origPlayerX;
+	if (yCollided && vertCollided) playerY = origPlayerY;
 
-		playerX = Math.max(0, playerX);
-		playerX = Math.min(winWidth*(8/10) - playerWidth, playerX);
-		playerY = Math.max(0, playerY);
-		playerY = Math.min(winHeight*(8/10) - playerHeight, playerY);
+	xCollided = false;
+	yCollided = false;
+	horiCollided = false;
+	vertCollided = false;
 
-		if (gameState === 2 && (origPlayerX !== playerX || origPlayerY !== playerY)) {
-			travelledPath.push([playerX, playerY]);
-		}
-		trailPath.push([playerX, playerY]);
-		if (trailPath.length > 15) {
-			trailPath.shift();
-		}
-	} else {
-		collided = false;
+	playerX = Math.max(0, playerX);
+	playerX = Math.min(winWidth*(8/10) - playerWidth, playerX);
+	playerY = Math.max(0, playerY);
+	playerY = Math.min(winHeight*(8/10) - playerHeight, playerY);
+
+	if (gameState === 2 && (origPlayerX !== playerX || origPlayerY !== playerY)) {
+		travelledPath.push([playerX, playerY]);
+	}
+
+	trailPath.push([playerX, playerY]);
+	if (trailPath.length > 15) {
+		trailPath.shift();
 	}
 
 	ctx.drawImage(playerSrc, playerX, playerY);
@@ -86,8 +98,10 @@ function drawObjects(c, ctx) {
 	var rectX = c.width * (5 / 8) - rectWidth / 2;
 	var rectY = c.height / 2 -rectHeight / 2;
 	ctx.drawImage(doorSrc, doorX, doorY);
-	ctx.drawImage(keySrc, keyX, keyY);
+	if (!keyFound) ctx.drawImage(keySrc, keyX, keyY);
+	ctx.fillStyle = "#33334d";
 	ctx.fillRect(rectX, rectY, rectWidth, rectHeight);
+	ctx.fillStyle = "black";
 }
 
 function gameLoop(c, ctx) {
@@ -102,7 +116,6 @@ function gameLoop(c, ctx) {
 $(document).ready(function() {
 	var c = $("canvas")[0];
 	var ctx = c.getContext("2d");
-	ctx.fillStyle = "black";
 
 	winHeight = $(window).height();
 	winWidth = $(window).width();
