@@ -1,6 +1,6 @@
-function detectCollisions() {
+function detectCollisions(ctx) { // not going to try to make collisions perfect for every case, only cases used in this game
 	objectCollision();
-	doorCollision();
+	doorCollision(ctx);
 	keyCollision();
 }
 
@@ -11,11 +11,17 @@ function keyCollision() {
 	}
 }
 
-function doorCollision() {
+function doorCollision(ctx) {
 	if (keyFound) {
 		if (collisionSquare(playerX, playerY, playerWidth, playerHeight, doorX, doorY, doorWidth, doorHeight, false)) {
 			if (gameState === 1) {
 				initializeMain();
+			} else if (gameState === 2 && levelState === 0) {
+				initializeMain(1);
+			} else if (gameState === 2 && levelState === 1) {
+				initializeMain(2);
+			} else if (gameState === 2 && levelState === 2) {
+				showFinalScreen(ctx);
 			}
 		}
 	} else {
@@ -42,7 +48,7 @@ function collisionSquare(x1, y1, w1, h1, x2, y2, w2, h2, retain) {
 		if (!xCollided) xCollided = xCollide;
 		if (!yCollided) yCollided = yCollide;
 		if (!horiCollided) horiCollided = horiCollide;
-		if (!vertCollided) vertCollided = vertCollide;
+		if (!vertCollided && !horiCollided) vertCollided = vertCollide;
 	}
 	return xCollide && yCollide;
 }
