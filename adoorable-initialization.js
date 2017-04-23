@@ -208,14 +208,14 @@ function initializeMain(level) {
 		doorX = boundaryLeft + canWidth*(2.7/10) - doorWidth/2;
 		doorY = boundaryTop + canHeight*(0.5/10);
 		keyX = boundaryLeft + canWidth*(1.5/10) - keyWidth/2;
-		keyY = boundaryBottom - canWidth*(0.35/10);
+		keyY = boundaryBottom - canWidth*(0.45/10);
 
 		objectLocations["31Rect"] = {
 			type: "square",
 			x: boundaryLeft + canWidth*(0.6/10),
 			y: boundaryTop + canWidth*(0.5/10) + canHeight*(0.5/10),
 			w: canWidth*(1.8/10),
-			h: canWidth*(2/10) - canHeight*(0.5/10),
+			h: canWidth*(2/10) - canHeight*(0.5/10) - canWidth*(0.1/10),
 		}
 	}
 

@@ -130,7 +130,7 @@ function drawPlayerOnPath(ctx) {
 			setTimeout(() => ctx.clearRect(0, 0, winWidth*(8/10), winHeight*(8/10)), 0);
 			elapsedLoops = 0;
 			levelState = 0;
-			gameLoopInterval = setInterval(function() { finalLoop(ctx) }, 25);
+			gameLoopInterval = setInterval(function() { finalLoop(ctx) }, 20);
 			return;
 		}
 	}

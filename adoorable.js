@@ -81,7 +81,10 @@ $(document).ready(function() {
 
 	winHeight = $(window).height();
 	winWidth = $(window).width();
-	if (winHeight < 750 || winWidth < 1600) alert("Warning: your window's size might be too small.");
+	console.log(winHeight, winWidth);
+	if (winHeight < 657 || winWidth < 1422) alert("Warning: your window's size might be too small.");
+	winHeight = 788;
+	winWidth = 1707;
 	c.height = winHeight*(8/10);
 	c.width = winWidth*(8/10);
 	ctx.lineWidth = 3;
@@ -91,10 +94,11 @@ $(document).ready(function() {
 	$("canvas").fadeIn();
 
 	$(window).resize(function() {
-		gameIsOver = true;
 		winHeight = $(window).height();
 		winWidth = $(window).width();
-		if (winHeight < 750 || winWidth < 1600) alert("Warning: your window's size might be too small.");
+		if (winHeight < 657 || winWidth < 1422) alert("Warning: your window's size might be too small.");
+		winHeight = 788;
+		winWidth = 1707;
 		c.height = winHeight*(8/10);
 		c.width = winWidth*(8/10);
 		canHeight = c.height;
@@ -103,8 +107,10 @@ $(document).ready(function() {
 		$("canvas").fadeIn();
 		doorLock = false;
 		initialize(c, ctx);
-		gameIsOver = false;
-		window.requestAnimationFrame(function() { gameLoop(ctx) });
+		if (gameIsOver) {
+			gameIsOver = false;
+			window.requestAnimationFrame(function() { gameLoop(ctx) });
+		}
 	});
 
 	initialize(c, ctx);
