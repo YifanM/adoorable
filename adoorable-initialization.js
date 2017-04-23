@@ -140,7 +140,7 @@ function initializeMain(level) {
 	} else if (level === 1) {
 		levelState = 1;
 		travelledPath[levelState] = [];
-		levelTime = 5600;
+		levelTime = 5400;
 
 		boundaryLeft = canWidth*(3/10) + canWidth*(0.5/10);
 		boundaryTop = canHeight*(5/10) - canWidth*(1.5/10);
