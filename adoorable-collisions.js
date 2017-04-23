@@ -6,7 +6,7 @@ function detectCollisions(ctx) { // not going to try to make collisions perfect 
 
 function keyCollision() {
 	if (collisionSquare(playerX, playerY, playerWidth, playerHeight, keyX, keyY, keyWidth, keyHeight, false)) {
-		doorSrc.src = "openDoor.png";
+		doorSrc.src = "resources/openDoor.png";
 		keyFound = true;
 	}
 }

@@ -14,7 +14,7 @@ function initialize(c, ctx) {
 		ctx.drawImage(playerSrc, playerX, playerY);
 	}
 
-	playerSrc.src = "player.png";
+	playerSrc.src = "resources/player.png";
 
 	keySrc = new Image();
 	
@@ -26,7 +26,7 @@ function initialize(c, ctx) {
 		ctx.drawImage(keySrc, keyX, keyY);
 	}
 
-	keySrc.src = "key.jpg";
+	keySrc.src = "resources/key.jpg";
 
 	doorSrc = new Image();
 	
@@ -40,7 +40,7 @@ function initialize(c, ctx) {
 		ctx.drawImage(doorSrc, doorX, doorY);
 	}
 
-	doorSrc.src = "lockedDoor.png";
+	doorSrc.src = "resources/lockedDoor.png";
 
 	var arrowKeys = new Image();
 
@@ -52,7 +52,7 @@ function initialize(c, ctx) {
 		ctx.drawImage(arrowKeys, arrowKeyX, arrowKeyY);
 	}
 
-	arrowKeys.src = "arrowKeys.png";
+	arrowKeys.src = "resources/arrowKeys.png";
 
 	var rectHeight = 300;
 	var rectWidth = 20;
@@ -88,7 +88,7 @@ function initializeMain(level) {
 
 	keyFound = false;
 	doorLock = true;
-	doorSrc.src = "lockedDoor.png";
+	doorSrc.src = "resources/lockedDoor.png";
 
 	if (!level || level === 0) {
 		levelState = 0;
